@@ -1,8 +1,12 @@
 .env
 .DS_Store
+
 venv/
 .idea/
 __pycache__/
+
 *.pyc
 
+logs/
 node_modules/
+sample_mev_task_bm/

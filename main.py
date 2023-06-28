@@ -36,19 +36,19 @@ def benchmark_contract_call(w3: Web3):
 if __name__ == '__main__':
     free_w3 = Web3(Web3.HTTPProvider(ALCHEMY_FREE_RPC_URL))
     paid_w3 = Web3(Web3.HTTPProvider(ALCHEMY_PAID_RPC_URL))
-    local_w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))  # you need a local node for this
+    local_w3 = Web3(Web3.HTTPProvider('http://192.168.200.182:8545'))  # you need a local node for this
 
     block_number = free_w3.eth.get_block('latest').number
 
     # TX requests
-    # t1 = timeit.timeit(lambda: benchmark_tx_requests(free_w3, block_number), number=1)
-    # print(f'Free tier: {t1} seconds')  # 26.88 seconds
-    #
-    # t2 = timeit.timeit(lambda: benchmark_tx_requests(paid_w3, block_number), number=1)
-    # print(f'Paid tier: {t2} seconds')  # 28 seconds
-    #
-    # t3 = timeit.timeit(lambda: benchmark_tx_requests(local_w3, block_number), number=1)
-    # print(f'Local: {t3} seconds')  # 0.54 seconds
+    t1 = timeit.timeit(lambda: benchmark_tx_requests(free_w3, block_number), number=1)
+    print(f'Free tier: {t1} seconds')  # 26.88 seconds
+
+    t2 = timeit.timeit(lambda: benchmark_tx_requests(paid_w3, block_number), number=1)
+    print(f'Paid tier: {t2} seconds')  # 28 seconds
+
+    t3 = timeit.timeit(lambda: benchmark_tx_requests(local_w3, block_number), number=1)
+    print(f'Local: {t3} seconds')  # 0.54 seconds
 
     # Contract calls
     t1 = timeit.timeit(lambda: benchmark_contract_call(free_w3), number=10)
